@@ -24,6 +24,7 @@ import { ConfigurationTarget, IConfigurationService } from 'vs/platform/configur
 import { onUnexpectedError } from 'vs/base/common/errors';
 import { IStorageService, StorageScope } from 'vs/platform/storage/common/storage';
 import { buttonSecondary, buttonSecondaryBorder, buttonSecondaryHoverColor, contentSeperatorLine, setupModalShadowOne, setupModalShadowTwo, setupOverlay } from 'sql/platform/theme/common/colorRegistry';
+import { BrowserTelemetryOptOut } from 'vs/workbench/contrib/welcome/telemetryOptOut/browser/telemetryOptOut';
 const intialSetupWizardKey = 'workbench.initialSetup';
 
 const $ = dom.$;
@@ -117,7 +118,8 @@ export class GettingStartedSetupWizard implements IWorkbenchContribution {
 		@ILayoutService private readonly layoutService: ILayoutService,
 		@IStorageService private readonly storageService: IStorageService,
 		@IContextKeyService private readonly _contextKeyService: IContextKeyService,
-		@IConfigurationService private readonly configurationService: IConfigurationService
+		@IConfigurationService private readonly configurationService: IConfigurationService,
+		@IInstantiationService private readonly instantiationService: IInstantiationService
 	) {
 		this._overlayVisible = IS_OVERLAY_VISIBLE.bindTo(this._contextKeyService);
 	}
@@ -282,6 +284,8 @@ export class GettingStartedSetupWizard implements IWorkbenchContribution {
 
 	private wizardNextEvent(popups: NodeListOf<Element>, popupsLength: number, i: number): void {
 		if (i === (popupsLength - 1)) {
+			// Done button handler
+			this.instantiationService.createInstance(BrowserTelemetryOptOut); // creating an instance of this class will cause the telemetry opt-out notification
 			this.hide();
 			return;
 		}

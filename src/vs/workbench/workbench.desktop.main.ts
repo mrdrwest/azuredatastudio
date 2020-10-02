@@ -158,6 +158,3 @@ import 'sql/workbench/contrib/queryHistory/electron-browser/queryHistory.contrib
 
 // CLI
 import 'sql/workbench/contrib/commandLine/electron-browser/commandLine.contribution';
-
-//getting started
-import 'sql/workbench/contrib/welcome/gettingStarted/electron-browser/gettingStarted.contribution';
