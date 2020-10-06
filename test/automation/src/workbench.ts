@@ -57,7 +57,7 @@ export class Workbench {
 	readonly profiler: Profiler;
 	readonly queryEditors: QueryEditors;
 	readonly queryEditor: QueryEditor;
-	readonly sqlNotebbok: SqlNotebook;
+	readonly sqlNotebook: SqlNotebook;
 	// {{END}}
 
 	constructor(code: Code, userDataPath: string) {
@@ -81,7 +81,7 @@ export class Workbench {
 		this.profiler = new Profiler(code, this.quickaccess);
 		this.queryEditors = new QueryEditors(code, this.editors);
 		this.queryEditor = new QueryEditor(code);
-		this.sqlNotebbok = new SqlNotebook(code, this.quickaccess, this.quickinput, this.editors);
+		this.sqlNotebook = new SqlNotebook(code, this.quickaccess, this.quickinput, this.editors);
 		// {{END}}
 		this.notebook = new Notebook(this.quickaccess, code);
 	}
